@@ -1,0 +1,9 @@
+**/node_modules
+**/dist
+**/.queue
+**/.data
+*.log
+.git
+.env
+.env.local
+packages/agent/config/agent.json

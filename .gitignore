@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.log
+.env
+.env.local
+*.tgz
+
+# local agent state / secrets
+packages/agent/config/agent.json
+packages/agent/.queue/
+packages/server/.data/
+
+# build / tooling
+.DS_Store
+coverage/

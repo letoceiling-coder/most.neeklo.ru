@@ -1,0 +1,15 @@
+# Production overrides for genserver (most.neeklo.ru).
+# Avoids conflicts: host postgres on :5432, neeklo-tools on :3030.
+services:
+  db:
+    ports:
+      - "127.0.0.1:5437:5432"
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-most}
+
+  server:
+    ports:
+      - "127.0.0.1:3035:3030"
+    environment:
+      DATABASE_URL: postgres://most:${POSTGRES_PASSWORD:-most}@db:5432/most
+      PUBLIC_URL: https://most.neeklo.ru

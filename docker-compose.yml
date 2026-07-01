@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: most
+      POSTGRES_PASSWORD: most
+      POSTGRES_DB: most
+    volumes:
+      - most-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U most -d most"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  server:
+    build:
+      context: .
+      dockerfile: packages/server/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SERVER_PORT: "3030"
+      SERVER_HOST: "0.0.0.0"
+      DATABASE_URL: "postgres://most:most@db:5432/most"
+      PUBLIC_URL: "${PUBLIC_URL:-http://localhost:3030}"
+      OPERATOR_USER: "${OPERATOR_USER:-admin}"
+      OPERATOR_PASSWORD: "${OPERATOR_PASSWORD:-change-me}"
+      SESSION_SECRET: "${SESSION_SECRET:-change-me-too}"
+      AGENT_SHARED_SECRET: "${AGENT_SHARED_SECRET:-change-me-agent}"
+      OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
+      OPENROUTER_MODEL: "${OPENROUTER_MODEL:-openai/gpt-4o-mini}"
+      # Serve the built dashboard from this path inside the container
+      DASHBOARD_DIST: "/app/packages/dashboard/dist"
+    ports:
+      - "3030:3030"
+
+volumes:
+  most-db:

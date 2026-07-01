@@ -1,0 +1,10 @@
+{
+  "pcId": "pc-replace-me",
+  "token": "paste-token-from-dashboard-pairing",
+  "vpsWsUrl": "wss://most.neeklo.ru/agent",
+  "vpsHttpUrl": "https://most.neeklo.ru",
+  "chromeCdpEndpoint": "http://127.0.0.1:9222",
+  "agentVersion": "1.0.0",
+  "useCdpLock": false,
+  "sources": ["telegram", "whatsapp", "vk", "max", "instagram", "avito"]
+}

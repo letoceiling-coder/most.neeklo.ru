@@ -1,0 +1,31 @@
+{
+  "name": "most",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Most — мост ПК ↔ VPS для входящих сообщений мессенджеров (Telegram, MAX, VK, Avito, Instagram, WhatsApp)",
+  "type": "module",
+  "workspaces": [
+    "packages/shared",
+    "packages/server",
+    "packages/agent",
+    "packages/dashboard"
+  ],
+  "scripts": {
+    "build": "npm run build -w @most/shared && npm run build -w @most/server && npm run build -w @most/agent",
+    "build:all": "npm run build && npm run build -w @most/dashboard",
+    "test": "npm run build:shared && node --import tsx --test --test-concurrency=1 scripts/verify-structure.test.mjs packages/shared/src/test/shared.test.ts packages/server/src/test/integration.test.ts && node --import tsx scripts/smoke-ingest.mjs && node --import tsx scripts/smoke-sequence.mjs",
+    "test:structure": "node --test scripts/verify-structure.test.mjs",
+    "build:shared": "npm run build -w @most/shared",
+    "build:server": "npm run build -w @most/server",
+    "build:agent": "npm run build -w @most/agent",
+    "dev:server": "npm run dev -w @most/server",
+    "dev:agent": "npm run dev -w @most/agent",
+    "dev:dashboard": "npm run dev -w @most/dashboard",
+    "start:server": "npm run start -w @most/server",
+    "start:agent": "npm run start -w @most/agent",
+    "migrate": "npm run migrate -w @most/server"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

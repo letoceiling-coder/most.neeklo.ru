@@ -1,0 +1,30 @@
+{
+  "name": "@most/server",
+  "version": "1.0.0",
+  "description": "Most VPS API: unified ingest, contact dedup/tagging, webhooks, OpenRouter, WS hub",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "migrate": "tsx src/db/migrate.ts"
+  },
+  "dependencies": {
+    "@most/shared": "1.0.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.13.1",
+    "winston": "^3.17.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.13.4",
+    "@types/pg": "^8.11.10",
+    "@types/ws": "^8.5.13",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "pg-mem": "^3.0.5"
+  }
+}

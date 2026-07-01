@@ -1,0 +1,24 @@
+{
+  "name": "@most/agent",
+  "version": "1.0.0",
+  "description": "Most PC agent: watches authorized web messengers over CDP and streams inbound messages to the VPS",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@most/shared": "1.0.0",
+    "playwright": "^1.50.1",
+    "winston": "^3.17.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@types/ws": "^8.5.13",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}

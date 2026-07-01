@@ -1,0 +1,15 @@
+[Unit]
+Description=Most VPS API (ingest + dashboard + webhooks)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/most
+EnvironmentFile=/opt/most/.env
+ExecStart=/usr/bin/node packages/server/dist/index.js
+Restart=always
+RestartSec=5
+User=most
+
+[Install]
+WantedBy=multi-user.target
