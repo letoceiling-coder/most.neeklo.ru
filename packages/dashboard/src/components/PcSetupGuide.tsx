@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { buildCursorSetupPrompt, type SetupOs } from '../docs/cursorPrompt.js';
+import { MOST_GIT_REPO, gitCloneCommand } from '../docs/repo.js';
 
 export interface PcSetupData {
   pcId: string;
@@ -147,6 +148,7 @@ export function PcSetupGuide({
   const [os, setOs] = useState<Os>('windows');
   const agentText = JSON.stringify(setup.agentJson, null, 2);
   const cursorPrompt = buildCursorSetupPrompt(setup, os);
+  const cloneCmd = gitCloneCommand(os === 'windows' ? 'C:\\projects\\most.neeklo.ru' : '~/most.neeklo.ru');
 
   return (
     <div className="card setup-guide">
@@ -187,6 +189,15 @@ export function PcSetupGuide({
               {o === 'windows' ? 'Windows' : o === 'linux' ? 'Linux' : 'macOS'}
             </button>
           ))}
+        </div>
+        <div className="setup-git-repo">
+          <strong>Репозиторий проекта</strong>
+          <p className="muted" style={{ margin: '6px 0' }}>
+            Скачать код на ПК (в промпте ниже — полная установка):
+          </p>
+          <code>{MOST_GIT_REPO}</code>
+          <pre className="code docs-pre" style={{ marginTop: 8 }}>{cloneCmd}</pre>
+          <CopyBtn text={cloneCmd} label="Копировать git clone" />
         </div>
         <pre className="code docs-pre setup-cursor-pre">{cursorPrompt}</pre>
         <CopyBtn text={cursorPrompt} label="Копировать промпт для Cursor" />

@@ -368,6 +368,17 @@ th {
   border-radius: 10px;
   background: rgba(79, 140, 255, 0.06);
 }
+.setup-git-repo {
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+}
+.setup-git-repo code {
+  word-break: break-all;
+  font-size: 12px;
+}
 .setup-cursor-pre {
   max-height: 320px;
   overflow: auto;
